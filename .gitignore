@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 program.py
 test.py
+.pytest_cache/

@@ -12,10 +12,12 @@ def parse_input(text):
 	to_be_paid = round(amount*rates[currency], 2)
 	cents = int(str(to_be_paid).split(".")[1])
 
-	return to_be_paid, cents, converted_current
+	return int(to_be_paid), cents, converted_current
 
 
 def output(amount, cents, currency):
+	if not amount and not cents and not currency:
+		return "You did mistake!"
 	if cents == 0:
 		return "%d %s" %(amount, currency)
 	else:
