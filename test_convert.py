@@ -4,22 +4,22 @@ import pytest
 parse = pytest.mark.parse
 output_marker = pytest.mark.output
 
+
+@pytest.mark.parametrize(("string", "data"), [
+	("100 EUR", (122, 0, "USD")),
+	("100 USD", (81, 0, "EUR")),
+	("99 USD", (80, 19, "EUR")),
+	(("99 eur"), (120, 78, "USD")),
+])
+def test_currency_exchange(string, data):
+	assert parse_input(string) == data
+
+
 @parse
 class TestorParseTest:
+
 	def test_no_argument_passed(self):
 		assert parse_input("") == (None, None, None)
-
-	def test_100eur_to_usd(self):
-		assert parse_input("100 EUR") == (122, 0, "USD")
-
-	def test_100usd_to_eur(self):
-		assert parse_input("100 USD") == (81, 0, "EUR")
-
-	def test_99usd_to_eur(self):
-		assert parse_input("99 USD") == (80, 19, "EUR")
-
-	def test_100usd_capital_letters(self):
-		assert parse_input("99 eur") == (120, 78, "USD")
 
 	def test_more_then_100_centes(self):
 		pytest.skip("skip this test")
